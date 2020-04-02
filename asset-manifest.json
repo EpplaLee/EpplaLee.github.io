@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/EpplaLee.github.io/static/css/main.069306dd.chunk.css",
+    "main.js": "/EpplaLee.github.io/static/js/main.4d4d190b.chunk.js",
+    "main.js.map": "/EpplaLee.github.io/static/js/main.4d4d190b.chunk.js.map",
+    "runtime-main.js": "/EpplaLee.github.io/static/js/runtime-main.441fcf9b.js",
+    "runtime-main.js.map": "/EpplaLee.github.io/static/js/runtime-main.441fcf9b.js.map",
+    "static/js/2.b0ed0102.chunk.js": "/EpplaLee.github.io/static/js/2.b0ed0102.chunk.js",
+    "static/js/2.b0ed0102.chunk.js.map": "/EpplaLee.github.io/static/js/2.b0ed0102.chunk.js.map",
+    "index.html": "/EpplaLee.github.io/index.html",
+    "precache-manifest.a6b58de844ec029e08a35c03f67d41e1.js": "/EpplaLee.github.io/precache-manifest.a6b58de844ec029e08a35c03f67d41e1.js",
+    "service-worker.js": "/EpplaLee.github.io/service-worker.js",
+    "static/css/main.069306dd.chunk.css.map": "/EpplaLee.github.io/static/css/main.069306dd.chunk.css.map",
+    "static/js/2.b0ed0102.chunk.js.LICENSE.txt": "/EpplaLee.github.io/static/js/2.b0ed0102.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.441fcf9b.js",
+    "static/js/2.b0ed0102.chunk.js",
+    "static/css/main.069306dd.chunk.css",
+    "static/js/main.4d4d190b.chunk.js"
+  ]
+}
