@@ -6,10 +6,14 @@ function Search() {
   const [ target , setTarget ] = useState({}) 
   const [ input, setInput ] = useState("")
 
+  const handleSearch = (str) => {
+    
+  }
+
   return (
     <div className="search">
       <div className="input-row">
-        <input className="input-item" />
+        <input onChange={(e) => { handleSearch(e.target.value) }} placeholder="请输入宝可梦名称进行搜索" className="input-item" />
       </div>
     </div>
   );
