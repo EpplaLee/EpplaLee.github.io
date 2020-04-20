@@ -27,7 +27,8 @@ class LifeGame extends Component {
     })
   }
   initBoard() {
-    const matrix = Array(50).fill(Array(50).fill(0))
+    // const matrix = Array(50).fill(Array(50).fill(0))
+    const matrix = Array(50).fill().map( () => Array(50).fill(0))
     this.setState({ matrix: matrix }, () => {
       this.drawMatrix()
     })
@@ -50,20 +51,23 @@ class LifeGame extends Component {
   drawMatrix() {
     const { ctx, matrix } = this.state
     ctx.clearRect(0,0, WIDTH * ITEM_WIDTH, HEIGHT * ITEM_WIDTH); 
-    matrix.forEach( (arr, i) => {
-      arr.forEach( (item, j) => {
+    matrix.forEach( (arr, y) => {
+      arr.forEach( (item, x) => {
         if(item == 1) {
-          ctx.fillRect(i * ITEM_WIDTH, j * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
+          ctx.fillRect(x * ITEM_WIDTH, y * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
         } else {
-          ctx.strokeRect(i * ITEM_WIDTH, j * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
+          ctx.strokeRect(x * ITEM_WIDTH, y * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
         }
       })
     })
   }
   switchSingle(x, y) {
     const { ctx, matrix } = this.state
-    matrix[x][y] = matrix[x][y] == 1 ? 0 : 1
-    if(matrix[x][y] == 1) {
+    const nextMatrix = cloneDeep(matrix)
+    nextMatrix[y][x] = nextMatrix[y][x] == 1 ? 0 : 1
+    this.setState({ matrix: nextMatrix })
+    ctx.clearRect(x * ITEM_WIDTH, y * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH); 
+    if(nextMatrix[y][x] == 1) {
       ctx.fillRect(x * ITEM_WIDTH, y * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
     } else {
       ctx.strokeRect(x * ITEM_WIDTH, y * ITEM_WIDTH, ITEM_WIDTH, ITEM_WIDTH);
@@ -73,9 +77,9 @@ class LifeGame extends Component {
   traverse() {
     const { matrix } = this.state
     const nextMatrix = cloneDeep(matrix)
-    matrix.forEach( (arr, i) => {
-      arr.forEach( (item, j) => {
-        nextMatrix[i][j] = this.check(i, j)
+    matrix.forEach( (arr, y) => {
+      arr.forEach( (item, x) => {
+        nextMatrix[y][x] = this.check(x, y)
       })
     })
     this.setState({ matrix: nextMatrix}, () => {
@@ -85,7 +89,7 @@ class LifeGame extends Component {
   // 检查当前方格
   check(x, y) {
     const { matrix } = this.state
-    const count =  this.getItemValue(x-1, y) 
+    const count =  this.getItemValue(x-1, y - 1) 
       + this.getItemValue(x, y - 1)
       + this.getItemValue(x + 1, y - 1)
       + this.getItemValue(x - 1, y)
@@ -93,13 +97,12 @@ class LifeGame extends Component {
       + this.getItemValue(x - 1, y + 1)
       + this.getItemValue(x, y + 1)
       + this.getItemValue(x + 1, y + 1)
-
     if(count == 3) {
       // 周围细胞数为3时，一定为1
       return 1
     } else if(count == 2) {
       // 周围细胞数为2时，1保持1，0保持0
-      return matrix[x][y]
+      return matrix[y][x]
     } else {
       // 其他情况，一定为0
       return 0
@@ -108,7 +111,7 @@ class LifeGame extends Component {
 
   getItemValue(x, y) {
     const { matrix } = this.state
-    return (matrix[x] || [])[y] || 0
+    return (matrix[y] || [])[x] || 0
   }
 
   handleClick(e) {
@@ -123,10 +126,11 @@ class LifeGame extends Component {
   render() {
     return <div>
       <canvas width={WIDTH * ITEM_WIDTH} height={HEIGHT * ITEM_WIDTH} id='game-board' className='canvas' />
-      <button onClick={this.startGame.bind(this)}>开始</button>
-      <button onClick={this.pauseGame.bind(this)}>暂停</button>
-      <button onClick={this.endGame.bind(this)}>停止</button>
-
+      <div>
+        <button onClick={this.startGame.bind(this)}>开始</button>
+        <button onClick={this.pauseGame.bind(this)}>暂停</button>
+        <button onClick={this.endGame.bind(this)}>停止</button>
+      </div>
     </div>
   }
 }
@@ -139,3 +143,6 @@ export default LifeGame
 //  2. 通过点击输入初始条件
 //  3. 开始，停止和初始化
 //  4. 写文章
+
+// 5. 拖动输入
+// 6. 
