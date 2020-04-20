@@ -1,6 +1,5 @@
 {
   "name": "pokemon_helper",
-  "homepage": "http://epplalee.github.io/EpplaLee.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
