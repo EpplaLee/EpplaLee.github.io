@@ -14,8 +14,8 @@ export default function App() {
     <Router>
         <Switch>
           <Route component={LifeGame} path="/conway"></Route>
-          <Route component={Search} path="/search"></Route>
-          <Route component={Select} path="/"></Route>
+          <Route component={Search} path="/pokemon_find"></Route>
+          <Route component={Select} path="/pokemon_cal"></Route>
         </Switch>
     </Router>
   );
