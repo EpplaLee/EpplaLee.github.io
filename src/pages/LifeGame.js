@@ -20,7 +20,23 @@ class LifeGame extends Component {
   }
   componentDidMount() {
     const canvas = document.getElementById("game-board")
+    // 绑定点击事件
     canvas.addEventListener('click', this.handleClick.bind(this))
+    // 绑定点击拖动事件
+    canvas.onmousedown= (e) => {
+      //按下后可移动
+      canvas.onmousemove = (e) => {
+          const x = Math.floor(e.clientX / ITEM_WIDTH)
+          const y = Math.floor(e.clientY / ITEM_WIDTH)
+          this.switchSingle(x, y)
+      };
+      //鼠标抬起清除绑定事件
+      canvas.onmouseup = function(){
+          canvas.onmousemove = null;
+          canvas.onmouseup = null;
+      };
+  }
+
     const ctx = canvas.getContext('2d')
     this.setState({ ctx }, () => {
       this.initBoard()
@@ -61,6 +77,7 @@ class LifeGame extends Component {
       })
     })
   }
+  
   switchSingle(x, y) {
     const { ctx, matrix } = this.state
     const nextMatrix = cloneDeep(matrix)
